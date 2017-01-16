@@ -36,6 +36,9 @@ bool InputWindowInfo::touchableRegionContainsPoint(int32_t x, int32_t y) const {
 }
 
 bool InputWindowInfo::frameContainsPoint(int32_t x, int32_t y) const {
+    if(layoutParamsType == TYPE_SIDEBAR_TOOLS){
+        return touchableRegion.contains(x,y);
+    }
     return x >= frameLeft && x < frameRight
             && y >= frameTop && y < frameBottom;
 }
@@ -46,6 +49,7 @@ bool InputWindowInfo::isTrustedOverlay() const {
             || layoutParamsType == TYPE_MAGNIFICATION_OVERLAY
             || layoutParamsType == TYPE_STATUS_BAR
             || layoutParamsType == TYPE_NAVIGATION_BAR
+            || layoutParamsType == TYPE_SIDEBAR_TOOLS
             || layoutParamsType == TYPE_SECURE_SYSTEM_OVERLAY;
 }
 
